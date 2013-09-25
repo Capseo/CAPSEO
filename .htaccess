@@ -1,0 +1,169 @@
+ModPagespeed On
+ModPagespeedEnableFilters combine_css,combine_javascript
+# Direct Apache to send all HTML output to the mod_pagespeed
+# output handler.
+AddOutputFilterByType MOD_PAGESPEED_OUTPUT_FILTER text/html
+
+
+
+ModPagespeedEnableFilters	convert_jpeg_to_progressive,convert_jpeg_to_webp
+ModPagespeedEnableFilters	inline_images,inline_preview_images,insert_image_dimensions,lazyload_images
+ModPagespeedEnableFilters	recompress_images,resize_images,rewrite_images,resize_mobile_images,sprite_images
+
+
+# Filtrage pour adsense
+RewriteCond %{QUERY_STRING} ^.*(keygen).* [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} ^.*(dvdrip).* [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} ^.*(bdrip).* [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} ^.*(camdub).* [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} ^.*(xvid).* [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} ^.*(siterip).* [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} ^.*(telesync).* [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} ^.*(telecine).* [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} ^.*(screener).* [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} ^.*(keymaker).* [NC]
+RewriteRule ^(.*)$ - [F,L]
+RewriteCond %{QUERY_STRING} ^.*(nocd).* [NC]
+RewriteRule ^(.*)$ - [F,L]
+
+
+# BEGIN Define Mime Types (in case /etc/mime.types is poorly configured or incorrect)
+<IfModule mod_mime.c>
+AddType application/x-javascript		.js
+AddType application/x-shockwave-flash	.swf
+AddType image/bmp						.bmp
+AddType image/gif						.gif
+AddType image/jpeg						.jpeg
+AddType image/jpg						.jpg
+AddType image/png						.png
+AddType image/svg+xml					.svg
+AddType image/tif						.tif
+AddType image/tiff						.tiff
+AddType image/x-icon					.ico
+AddType text/css						.css
+AddType text/htm						.htm
+AddType text/html						.html
+AddType text/plain						.txt
+AddType text/xml						.xml
+AddType text/xsd						.xsd
+AddType text/xsl						.xsl
+</IfModule>
+# END Define Mime Types
+
+# BEGIN Headers: Ensure browser caching of objects for 3 days
+# Set Expires header
+<IfModule mod_expires.c>
+ExpiresActive On
+ExpiresByType application/x-javascript		A259200
+ExpiresByType application/x-shockwave-flash	A259200
+ExpiresByType application/wlwmanifest+xml	A259200
+ExpiresByType image/bmp						A259200
+ExpiresByType image/gif						A259200
+ExpiresByType image/jpeg					A259200
+ExpiresByType image/jpg						A259200
+ExpiresByType image/png						A259200
+ExpiresByType image/svg+xml					A259200
+ExpiresByType image/tif						A259200
+ExpiresByType image/tiff					A259200
+ExpiresByType image/x-icon					A259200
+ExpiresByType text/css						A259200
+ExpiresByType text/htm						A259200
+ExpiresByType text/html						A259200
+ExpiresByType text/plain					A259200
+ExpiresByType text/xml						A259200
+ExpiresByType text/xsd						A259200
+ExpiresByType text/xsl						A259200
+</IfModule>
+
+<FilesMatch "\.(bmp|css|ico|html?|js|tiff?|gif|jpe?g|png|svgz?|swf|txt|xsd|xsl|xml)$">
+<IfModule mod_headers.c>
+# Set Pragma header
+Header set Pragma "public"
+# Set Cache-Control header
+Header append Cache-Control "public, must-revalidate, proxy-revalidate"
+</IfModule>
+
+# Set Entity Tag header
+FileETag MTime Size
+</FilesMatch>
+# END Headers: Ensure client-side caching of objects
+
+#php_value zlib.output_compression On
+<ifModule mod_gzip.so>
+  mod_gzip_on Yes
+  mod_gzip_dechunk Yes
+  mod_gzip_item_include file \.(html?|txt|css|js|php|pl)$
+  mod_gzip_item_include handler ^cgi-script$
+  mod_gzip_item_include mime ^text/.*
+  mod_gzip_item_include mime ^application/x-javascript.*
+  mod_gzip_item_exclude mime ^image/.*
+  mod_gzip_item_exclude rspheader ^Content-Encoding:.*gzip.*
+</ifModule>
+
+# BEGIN Expire headers
+<IfModule mod_expires.c>
+ ExpiresActive On
+ ExpiresDefault "access plus 7200 seconds"
+ ExpiresByType image/jpg "access plus 2592000 seconds"
+ ExpiresByType image/jpeg "access plus 2592000 seconds"
+ ExpiresByType image/png "access plus 2592000 seconds"
+ ExpiresByType image/gif "access plus 2592000 seconds"
+ AddType image/x-icon .ico
+ ExpiresByType image/ico "access plus 2592000 seconds"
+ ExpiresByType image/icon "access plus 2592000 seconds"
+ ExpiresByType image/x-icon "access plus 2592000 seconds"
+ ExpiresByType text/css "access plus 2592000 seconds"
+ ExpiresByType text/javascript "access plus 2592000 seconds"
+ ExpiresByType text/html "access plus 7200 seconds"
+ ExpiresByType application/xhtml+xml "access plus 7200 seconds"
+ ExpiresByType application/javascript A259200
+ ExpiresByType application/x-javascript "access plus 2592000 seconds"
+ ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"
+</IfModule>
+# END Expire headers
+
+# BEGIN Cache-Control Headers
+<IfModule mod_headers.c>
+ <FilesMatch "\\.(ico|jpe?g|png|gif|swf|css|gz)$">
+ Header set Cache-Control "max-age=2592000, public"
+ </FilesMatch>
+ <FilesMatch "\\.(js)$">
+ Header set Cache-Control "max-age=2592000, private"
+ </FilesMatch>
+<filesMatch "\\.(html|htm)$">
+Header set Cache-Control "max-age=7200, public"
+</filesMatch>
+# Disable caching for scripts and other dynamic files
+<FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+Header unset Cache-Control
+</FilesMatch>
+</IfModule>
+# END Cache-Control Headers
+
+# KILL THEM ETAGS
+Header unset ETag
+FileETag none
+
+<IfModule mod_speling.c>
+CheckSpelling on
+</IfModule>
+
+<Files ~ "^\.ht">
+order allow,deny
+satisfy all
+</Files>
+# Deny most common except .php (Also protects your .tpl template files)
+<FilesMatch "\.(db|inc|tpl|tmpl|h|ihtml|sql|ini|class|bin|spd|theme|module|cfg|cpl|tmp|log|err)$">
+order allow,deny
+satisfy all
+</FilesMatch>
+

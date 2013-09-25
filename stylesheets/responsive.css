@@ -1,0 +1,237 @@
+/* iPads (portrait and landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) {
+
+	.capseo{
+		margin:0 auto !important;
+		text-align:center !important;
+	}
+	
+	.page-front .three{
+		width:22%;
+	}
+	
+	.page{
+		width: 100%;
+		left: 0px;
+	}
+	
+	.row{
+		max-width: 860px;
+	}
+
+	.home-hero{
+		width: 100% !important;
+		text-align:center !important;
+	}
+	
+	.exit{
+		right: 85px;
+	}
+	
+	.project{
+		top: 60px;
+		right: 60px;
+		width: 90%;
+	}
+	
+	#contact{
+		position: absolute;
+	}
+	
+	
+
+}
+
+/* iPads (landscape) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : landscape) {
+
+	.capseo{
+		margin:0 auto !important;
+		text-align:center !important;
+	}
+	
+	.page-front .three{
+		width:22%;
+	}
+	
+	.home-hero{
+		text-align:center !important;
+	}
+	
+	#nav-holder{
+		left: 0px !important;
+	}
+
+
+}
+
+
+/* iPads (portrait) ----------- */
+@media only screen 
+and (min-device-width : 768px) 
+and (max-device-width : 1024px) 
+and (orientation : portrait) {
+
+	.capseo{
+		margin:0 auto !important;
+		text-align:center !important;
+	}
+	
+	.page-front .three{
+		width:22%;
+	}
+	
+	.home-hero{
+		text-align:center !important;
+	}
+
+	.mobile-toggle{
+		display: block !important;
+	}
+	
+	#nav-holder{
+		left: -60px;
+	}
+	
+	#social-holder{
+		display: none !important;
+	}
+	
+	.page{
+		min-width: 868px;
+	}
+	
+	.project{
+		top: 60px;
+		right: 0px;
+		
+	}
+	
+	.exit{
+		right: 25px;
+	}
+	
+	
+
+
+}
+
+
+@media only screen and (max-width: 767px){
+
+	html {overflow: auto !important;}
+
+	#main-container{
+		overflow: auto !important;
+	}
+	#home{
+		overflow: auto !important;
+	}
+
+	.capseo{
+		margin:0 auto !important;
+		text-align:center !important;
+	}
+	
+	.home-hero{
+		text-align:center !important;
+	}
+	
+	.page-front .three{
+		width:22% !important;
+		display:inline-block;
+	}
+	
+	#nav-holder{
+		left: -60px;
+	}
+	
+	.slidesjs-container{
+		width: 100% !important;
+		height: 170px !important;
+		padding-top:30px !important;
+	}
+	
+	#home-content{
+		padding-top: 10px !important;
+	}
+	
+	.hero-h1{
+		font-size: 60px;
+		text-align: center;
+	}
+	
+	.page{
+		width: 100%;
+		left: 0px;
+		top:250px !important;
+	}
+	
+	.process-wrapper{
+		margin-bottom: 22px;
+	}
+	
+	.service-wrapper{
+		margin-bottom: 22px;
+	}
+
+	.testimonial-customer{
+		margin-bottom: 22px;
+	}
+	
+	.team-wrap{
+		width: 80%;
+		margin: 0px auto;
+		margin-bottom: 22px;
+	}
+	
+	#about .page-spiel p{
+		columns: 100px 1;
+	-webkit-columns: 100px 1;
+	-moz-columns: 100px 1;
+	}
+	
+	.project{
+		width: 100%;
+		right: 0px;
+		max-height: 800px;
+		top: 80px;
+		position: absolute;
+	}
+	
+	.project-details{
+		margin-bottom: 44px;
+	}
+	
+	.page-spiel p{
+		width: 100%;
+	}
+	
+	#contact{
+		width: 100%;
+		left: 0px;
+		position: absolute;
+	}
+	
+	#home .btn{
+		display: none !important;
+	}
+	
+	.hero-p{
+		font-size: 16px;
+	}
+	
+	#video iframe{
+		display:block;
+		width:240px;
+		height:146px;
+		margin-top:4px;
+		margin-left:35px;
+	}
+
+}
